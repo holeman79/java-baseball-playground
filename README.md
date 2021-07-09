@@ -24,3 +24,8 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+
+## 기능 요구사항
+
+* 공 두 개를 비교하여 볼, 스트라이크, 낫띵을 판단한다.
+* 공의 번호와 포지션 유효성을 체크한다.

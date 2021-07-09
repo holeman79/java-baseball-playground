@@ -2,8 +2,11 @@ package com.example.baseball;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class BallTest {
     private Ball computer;
@@ -32,5 +35,23 @@ public class BallTest {
         Ball player = new Ball(2, 3);
         BallStatus ballStatus = computer.play(player);
         assertThat(ballStatus).isEqualTo(BallStatus.NOTHING);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 10})
+    void throwIllegalArgumentException_WhenBallNumberOver9OrUnder1(int input) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    new Ball(input, 2);
+                });
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 4})
+    void throwIllegalArgumentException_WhenBallPositionOver3OrUnder1(int input) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    new Ball(1, input);
+                });
     }
 }
